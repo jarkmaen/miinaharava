@@ -1,0 +1,21 @@
+jarkmaen@lx0-fuxi116:~/tiedostoja$ git log --stat | cat
+commit 9334e02a33c6c7d0831cf057733220b98301d548
+Author: Jarkko Mäenrinta <73038801+jarkmaen@users.noreply.github.com>
+Date:   Mon Mar 22 15:47:35 2021 +0200
+
+    changes
+
+ file2           | 0
+ file1 => file22 | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 6b2b0a70df7c6ec81c84ef9ae3e33647cc021da7
+Author: Jarkko Mäenrinta <73038801+jarkmaen@users.noreply.github.com>
+Date:   Mon Mar 22 15:43:51 2021 +0200
+
+    files added
+
+ file1 | 0
+ file2 | 0
+ file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
