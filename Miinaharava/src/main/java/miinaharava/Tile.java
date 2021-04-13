@@ -20,19 +20,19 @@ public class Tile extends StackPane {
         this.y = y;
         this.hasBomb = hasBomb;
 
-        Rectangle rectangle = new Rectangle(20, 20);
+        Rectangle rectangle = new Rectangle(30, 30);
         rectangle.setStroke(Color.BLACK);
         rectangle.setFill(null);
 
         Text text = new Text();
         text.setText(hasBomb ? "X" : "1");
-        text.setFont(Font.font(12));
+        text.setFont(Font.font(16));
         text.setVisible(false);
 
         getChildren().addAll(rectangle, text);
         setAlignment(Pos.CENTER);
-        setTranslateX(x * 20);
-        setTranslateY(y * 20);
+        setTranslateX(x * 30);
+        setTranslateY(y * 30);
 
         setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {

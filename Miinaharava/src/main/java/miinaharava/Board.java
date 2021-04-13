@@ -17,7 +17,7 @@ public class Board extends Application {
 
     public Parent createBoard() {
         GridPane root = new GridPane();
-        root.setPrefSize(181, 181);
+        root.setPrefSize(271, 271);
 
         HashSet<Integer> set = new HashSet<>();
         Random random = new Random();
