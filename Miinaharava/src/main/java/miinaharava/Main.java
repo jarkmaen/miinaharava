@@ -1,8 +1,10 @@
 package miinaharava;
 
+import miinaharava.ui.MinesweeperUI;
+
 public class Main {
 
     public static void main(String[] args) {
-        Board.main(args);
+        MinesweeperUI.main(args);
     }
 }
