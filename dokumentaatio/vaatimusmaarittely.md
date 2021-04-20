@@ -19,9 +19,9 @@ Sovellus on perinteinen miinaharava-peli, jossa tarkoituksena on etsiä kaikki p
   - Nappia painamalla pääsee takaisin päävalikkoon.
   - Laskuri kertoo kuinka monta pommia on vielä löytämättä.
   - Ajastin näyttää kuinka kauan nykyinen peli on kestänyt.
-- Ruudun klikkaaminen vasemmalla hiiren painikkeella muuttaa valitun ruudun avatuksi. Ruutu voi joko sisältää numeron tai pommin.
-- Ruudun klikkaaminen oikealla hiiren painikkeella asettaa ruudun päälle lipun. Lipun tarkoituksena on helpottaa pelaajaa muistamaan missä on mahdollinen pommivaara.
-- Ruutu joka sisältää numeron kertoo kuinka monta pommia on sen kyseisen ruudun ympärillä.
+- Ruudun klikkaaminen vasemmalla hiiren painikkeella muuttaa valitun ruudun avatuksi. Ruutu voi joko sisältää numeron tai pommin. [tehty]
+- Ruudun klikkaaminen oikealla hiiren painikkeella asettaa ruudun päälle lipun. Lipun tarkoituksena on helpottaa pelaajaa muistamaan missä on mahdollinen pommivaara. [tehty]
+- Ruutu joka sisältää numeron kertoo kuinka monta pommia on sen kyseisen ruudun ympärillä. [tehty]
 - Jos pelaaja klikkaa ruutua mikä sisältää pommin, peli päättyy välittömästi.
 - Pelin päätyttyä voittoon ajastin keskeytetään ja peli kysyy pelaajan nimeä. Pelaajan nimi ja aika tallennetaan parhaiden tulosten listalle.
 
