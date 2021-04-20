@@ -8,6 +8,8 @@ Helsingin yliopiston Ohjelmistotekniikka-kurssin harjoitustyö. Sovellus on peri
 
 [Tuntikirjanpito](https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
+[Arkkitehtuurikuvaus](https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+
 ## Komentorivitoiminnot
 
 ### Ohjelman suorittaminen
@@ -32,4 +34,14 @@ Testikattavuusraportti luodaan komennolla
 mvn jacoco:report
 ```
 
-Raportin tulos löytää _target/site/jacoco_ -hakemistosta nimellä _index.html_
+Raportin tulos löytyy _target/site/jacoco_ -hakemistosta nimellä _index.html_
+
+### Checkstyle
+
+Checkstyle tarkistus suoritetaan komennolla
+
+```
+mvn jxr:jxr checkstyle:checkstyle
+```
+
+Raportin tulos löytyy _target/site/_ -hakemistosta nimellä _checkstyle.html_
