@@ -7,5 +7,5 @@ Lataa tiedosto [Miinaharava.jar](https://github.com/jarkmaen/ot-harjoitustyo/rel
 Ohjelma käynnistetään komennolla 
 
 ```
-java -jar miinaharava.jar
+java -jar Miinaharava.jar
 ```
