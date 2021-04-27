@@ -4,11 +4,17 @@ Helsingin yliopiston Ohjelmistotekniikka-kurssin harjoitustyö. Sovellus on peri
 
 ## Dokumentaatio
 
+[Käyttöohje](https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+
 [Vaatimusmäärittely](https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
 [Tuntikirjanpito](https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
 [Arkkitehtuurikuvaus](https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+
+## Releaset
+
+[Viikko 5](https://github.com/jarkmaen/ot-harjoitustyo/releases/tag/viikko5)
 
 ## Komentorivitoiminnot
 
@@ -19,6 +25,16 @@ Ohjelma ajetaan komennolla
 ```
 mvn compile exec:java -Dexec.mainClass=miinaharava.Main
 ```
+
+### Suoritettavan jarin generointi
+
+Komento
+
+```
+mvn package
+```
+
+luo hakemistoon _target_ suoritettavan jar-tiedoston _Miinaharava-1.0-SNAPSHOT.jar_
 
 ### Testaus
 
