@@ -40,4 +40,14 @@ public class BoardTest {
         }
         assertTrue(failed == false);
     }
+
+    @Test
+    public void gameEndsWhenAllSafeTilesAreOpen() {
+        board = new Board(9, 9, 10);
+        int safeTiles = board.getWidth() * board.getHeight() - board.getMinesCount();
+        for (int i = 0; i < safeTiles; i++) {
+            board.updateOpenTiles();
+        }
+        assertTrue(board.isGameOver() == true);
+    }
 }

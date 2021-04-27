@@ -8,12 +8,16 @@ public class Board {
     private int xTiles;
     private int yTiles;
     private int mines;
+    private int tilesOpen;
+    private int flagsSet;
     private Tile[][] grid;
 
     public Board(int xTiles, int yTiles, int mines) {
         this.xTiles = xTiles;
         this.yTiles = yTiles;
         this.mines = mines;
+        this.tilesOpen = 0;
+        this.flagsSet = 0;
         this.grid = new Tile[xTiles][yTiles];
 
         addMines();
@@ -74,7 +78,39 @@ public class Board {
         }
     }
 
+    public boolean isGameOver() {
+        return tilesOpen == xTiles * yTiles - mines;
+    }
+
+    public void updateOpenTiles() {
+        tilesOpen++;
+    }
+
+    public void updateFlagsSet(int x) {
+        flagsSet = flagsSet + x;
+    }
+
     public Tile[][] getGrid() {
-        return this.grid;
+        return grid;
+    }
+
+    public Tile getTile(int x, int y) {
+        return grid[x][y];
+    }
+
+    public int getWidth() {
+        return xTiles;
+    }
+
+    public int getHeight() {
+        return yTiles;
+    }
+
+    public int getMinesCount() {
+        return mines;
+    }
+
+    public int getFlagsSet() {
+        return flagsSet;
     }
 }
