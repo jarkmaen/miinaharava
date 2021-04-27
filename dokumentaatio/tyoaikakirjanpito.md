@@ -8,4 +8,7 @@
 | 19.04.2021 | 1,5h | Sovelluslogiikan erittely käyttöliittymästä           |
 | 19.04.2021 | 1,5h | Ruutu näyttää oikean pommimäärän sen ympärillä        |
 | 20.04.2021 | 1h   | Repositorion päivittäminen                            |
-| Yhteensä   | 14h  |                                                       |
+| 26.04.2021 | 3h   | Pelin päättymis ikkunat                               |
+| 27.04.2021 | 2h   | Päävalikko ja eri vaikeustasot                        |
+| 27.04.2021 | 1h   | GUI elementtien toiminnallisuuksia                    |
+| Yhteensä   | 20h  |                                                       |
