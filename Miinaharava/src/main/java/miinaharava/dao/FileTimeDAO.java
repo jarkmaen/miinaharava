@@ -30,7 +30,7 @@ public class FileTimeDAO implements TimeDAO {
     }
 
     private void save() throws Exception {
-        try ( FileWriter writer = new FileWriter(new File(file))) {
+        try (FileWriter writer = new FileWriter(new File(file))) {
             for (Time time : times) {
                 writer.write(time.getDifficulty() + "," + time.getName() + "," + time.getMinutes() + "," + time.getSeconds() + "\n");
             }
