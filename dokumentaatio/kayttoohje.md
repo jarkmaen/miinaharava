@@ -14,13 +14,13 @@ java -jar Miinaharava.jar
 
 Sovellus alkaa päävalikosta. Valikossa voit valita vaikeustason ja aloittaa pelin.
 
-<img src="https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/paavalikko.png">
+<img src="https://raw.githubusercontent.com/jarkmaen/ot-harjoitustyo/master/dokumentaatio/kuvat/paavalikko.PNG">
 
 Peli näkymässä voit alkaa raivaamaan ruutuja vasemmalla klikkauksella.
 
-<img src="https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/pelilauta.png">
+<img src="https://raw.githubusercontent.com/jarkmaen/ot-harjoitustyo/master/dokumentaatio/kuvat/pelilauta.PNG">
 
 Jos löydät kaikki turvalliset ruudut peli päättyy ja siirryt voittonäkymään. Voit syöttää nimesi ja tallentaa aikasi listoille, tai palata takaisin päävalikkoon ilman tallentamista.
 
-<img src="https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/voitit.png">
+<img src="https://raw.githubusercontent.com/jarkmaen/ot-harjoitustyo/master/dokumentaatio/kuvat/voitit.PNG">
 
