@@ -2,9 +2,9 @@
 
 ## Rakenne
 
-Koodin pakkausrakenne tällä hetkellä:
+Koodin pakkausrakenne:
 
-<img src="https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/pakkausrakenne.png">
+<img src="https://raw.githubusercontent.com/jarkmaen/ot-harjoitustyo/master/dokumentaatio/kuvat/pakkausrakenne.png">
 
 Pakkaus _miinaharava.ui_ sisältää käyttöliittymään liittyvät luokat, _miinaharava.logic_ sisältää sovelluslogiikan ja _miinaharava.dao_ sisältää tiedon tallentamisesta vastaavan koodin.
 
@@ -14,7 +14,7 @@ Pakkaus _miinaharava.ui_ sisältää käyttöliittymään liittyvät luokat, _mi
 
 Käyttäjä aloittaa pelin valitsemalla joko helppo, kohtalainen tai vaikea vaikeustason. Kun vaikeustaso on valittu, käyttöliittymä luo pelinäkymän getBoardWindow() metodilla. Pelialustan logiikka luodaan valitun vaikeustason perusteella. Uusi pelinäkymä näytetään käyttäjälle stage.setScene(boardScene) metodilla.
 
-<img src="https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/sekvenssikaavio.png">
+<img src="https://raw.githubusercontent.com/jarkmaen/ot-harjoitustyo/master/dokumentaatio/kuvat/sekvenssikaavio.png">
 
 ## Tietojen pysyväistallennus
 
@@ -29,7 +29,7 @@ Sovelluksen juuressa sijaitseva konfiguraatiotiedosto _config.properties_ määr
 Sovellus tallentaa tiedot tässä formaatissa:
 
 ```
-EASY,Veeti,0,48
+EASY,Jarkko,0,48
 ```
 
 Ensin valittu vaikeustaso, syötetty nimi, kuinka monta minuuttia kului ja kuinka monta sekunttia kului.
