@@ -15,15 +15,15 @@ Sovellus on perinteinen miinaharava-peli, jossa tarkoituksena on etsiä kaikki p
   - Jokaisen vaikeustaso napin vieressä on merkattu sen kentän nopein selvitysaika. Jos kenttää ei ole kertaakaan läpäisty, se näyttää tyhjää. **[]**
 
 #### Pelin aikana
-- Peliruudun yläreunasta löytyy nappi, laskuri ja ajastin. **[]**
+- Peliruudun yläreunasta löytyy nappi, laskuri ja ajastin. **[tehty]**
   - Nappia painamalla pääsee takaisin päävalikkoon. **[tehty]**
   - Laskuri kertoo kuinka monta pommia on vielä löytämättä. **[tehty]**
-  - Ajastin näyttää kuinka kauan nykyinen peli on kestänyt. **[]**
+  - Ajastin näyttää kuinka kauan nykyinen peli on kestänyt. **[tehty]**
 - Ruudun klikkaaminen vasemmalla hiiren painikkeella muuttaa valitun ruudun avatuksi. Ruutu voi joko sisältää numeron tai pommin. **[tehty]**
 - Ruudun klikkaaminen oikealla hiiren painikkeella asettaa ruudun päälle lipun. Lipun tarkoituksena on helpottaa pelaajaa muistamaan missä on mahdollinen pommivaara. **[tehty]**
 - Ruutu joka sisältää numeron kertoo kuinka monta pommia on sen kyseisen ruudun ympärillä. **[tehty]**
 - Jos pelaaja klikkaa ruutua mikä sisältää pommin, peli päättyy välittömästi. **[tehty]**
-- Pelin päätyttyä voittoon ajastin keskeytetään ja peli kysyy pelaajan nimeä. Pelaajan nimi ja aika tallennetaan parhaiden tulosten listalle. **[]**
+- Pelin päätyttyä voittoon ajastin keskeytetään ja peli kysyy pelaajan nimeä. Pelaajan nimi ja aika tallennetaan parhaiden tulosten listalle. **[tehty]**
 
 ## Jatkokehitysideoita
 

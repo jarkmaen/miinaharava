@@ -16,6 +16,8 @@ Helsingin yliopiston Ohjelmistotekniikka-kurssin harjoitustyö. Sovellus on peri
 
 [Viikko 5](https://github.com/jarkmaen/ot-harjoitustyo/releases/tag/viikko5)
 
+[Viikko 6](https://github.com/jarkmaen/ot-harjoitustyo/releases/tag/viikko5)
+
 ## Komentorivitoiminnot
 
 ### Ohjelman suorittaminen
@@ -50,7 +52,17 @@ Testikattavuusraportti luodaan komennolla
 mvn jacoco:report
 ```
 
-Raportin tulos löytyy _target/site/jacoco_ -hakemistosta nimellä _index.html_
+Raportin tulos löytyy _target/site/jacoco/_ -hakemistosta nimellä _index.html_
+
+### JavaDoc
+
+JavaDoc luodaan komennolla
+
+```
+mvn javadoc:javadoc
+```
+
+Raportin tulos löytyy _target/site/apidocs/_ -hakemistosta nimellä _index.html_
 
 ### Checkstyle
 
