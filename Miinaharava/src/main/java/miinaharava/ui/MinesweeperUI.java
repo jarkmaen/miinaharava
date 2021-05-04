@@ -1,6 +1,15 @@
 package miinaharava.ui;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Properties;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,15 +29,24 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import miinaharava.dao.FileTimeDAO;
 import miinaharava.logic.Board;
 import miinaharava.logic.Tile;
+import miinaharava.logic.TimeService;
 
 public class MinesweeperUI extends Application {
 
     private Board board;
     private Scene menuScene;
     private Scene lostScene;
-    private Scene winScene;
+
+    private TimeService timeService;
+
+    private Timeline timeline;
+    private Text timer;
+    private int minutes = 0;
+    private int seconds = 0;
 
     private Parent getMenuWindow(Stage stage) {
         VBox vBox = new VBox();
@@ -39,19 +57,19 @@ public class MinesweeperUI extends Application {
         Button easy = new Button("HELPPO --- 9x9 ALUE --- 10 MIINAA");
         easy.setPrefWidth(260);
         easy.setOnAction(value -> {
-            board = new Board(9, 9, 10);
+            board = new Board(9, 9, 10, "EASY");
             stage.setScene(new Scene(getBoardWindow(stage)));
         });
         Button medium = new Button("KOHTALAINEN --- 16x16 ALUE --- 40 MIINAA");
         medium.setPrefWidth(260);
         medium.setOnAction(value -> {
-            board = new Board(16, 16, 40);
+            board = new Board(16, 16, 40, "MEDIUM");
             stage.setScene(new Scene(getBoardWindow(stage)));
         });
         Button hard = new Button("VAIKEA --- 30x16 ALUE --- 99 MIINAA");
         hard.setPrefWidth(260);
         hard.setOnAction(value -> {
-            board = new Board(30, 16, 99);
+            board = new Board(30, 16, 99, "HARD");
             stage.setScene(new Scene(getBoardWindow(stage)));
         });
 
@@ -73,11 +91,11 @@ public class MinesweeperUI extends Application {
             stage.setScene(menuScene);
         });
         Text minesLeft = new Text("X: " + test);
-        Text timeLeft = new Text("--:--");
+        timer = new Text("0:0");
         headerPane.setLeft(button);
         headerPane.setCenter(minesLeft);
-        headerPane.setRight(timeLeft);
-        headerPane.setAlignment(timeLeft, Pos.CENTER);
+        headerPane.setRight(timer);
+        headerPane.setAlignment(timer, Pos.CENTER);
         headerPane.setPadding(new Insets(5, 5, 5, 5));
         headerPane.setPrefHeight(35);
 
@@ -108,7 +126,8 @@ public class MinesweeperUI extends Application {
                         value.setVisible(true);
                         board.updateOpenTiles();
                         if (board.isGameOver()) {
-                            stage.setScene(winScene);
+                            timeline.stop();
+                            stage.setScene(new Scene(getWinWindow(stage)));
                         }
                     } else if (e.getButton() == MouseButton.SECONDARY && !value.isVisible()) {
                         flag.setVisible(!flag.isVisible());
@@ -135,6 +154,7 @@ public class MinesweeperUI extends Application {
             if (e.getButton() == MouseButton.PRIMARY) {
                 Tile tile = board.getTile((int) (e.getX() / tileSize), (int) (e.getY() / tileSize));
                 if (tile.hasMine()) {
+                    timeline.stop();
                     stage.setScene(lostScene);
                 }
             }
@@ -146,6 +166,10 @@ public class MinesweeperUI extends Application {
         int prefW = tileSize * board.getWidth() + 1;
         int prefH = tileSize * board.getHeight() + 35 + 1;
         borderPane.setPrefSize(prefW, prefH);
+
+        minutes = 0;
+        seconds = 0;
+        timeline.play();
 
         return borderPane;
     }
@@ -174,15 +198,19 @@ public class MinesweeperUI extends Application {
         won.setFont(Font.font(22));
 
         Text time = new Text();
-        time.setText("AIKA: --:--");
+        time.setText("AIKA: " + minutes + ":" + seconds);
         time.setFont(Font.font(16));
 
         HBox hBox = new HBox();
         TextField textField = new TextField();
         textField.setPromptText("SYÖTÄ NIMESI");
-        textField.setDisable(true);
         Button saveButton = new Button("TALLENNA JA PALAA PÄÄVALIKKOON");
-        saveButton.setDisable(true);
+        saveButton.setOnAction(value -> {
+            if (!textField.getText().isEmpty()) {
+                timeService.createTime(board.getDifficulty(), textField.getText(), minutes, seconds);
+                stage.setScene(menuScene);
+            }
+        });
         hBox.getChildren().addAll(textField, saveButton);
         hBox.setAlignment(Pos.CENTER);
         hBox.setSpacing(10);
@@ -200,15 +228,49 @@ public class MinesweeperUI extends Application {
         return vBox;
     }
 
+    private void stopwatch() {
+        timeline = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (seconds == 60) {
+                    minutes++;
+                    seconds = 0;
+                }
+                timer.setText(minutes + ":" + seconds);
+                seconds++;
+            }
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.setAutoReverse(false);
+    }
+
     @Override
     public void start(Stage stage) {
         menuScene = new Scene(getMenuWindow(stage));
         lostScene = new Scene(getLostWindow(stage));
-        winScene = new Scene(getWinWindow(stage));
         stage.setScene(menuScene);
         stage.setTitle("Miinaharava");
         stage.setResizable(false);
         stage.show();
+        stopwatch();
+    }
+
+    @Override
+    public void init() throws Exception {
+        Properties properties = new Properties();
+        File file = new File("config.properties");
+        if (!file.exists()) {
+            try (final OutputStream output = new FileOutputStream("config.properties")) {
+                properties.setProperty("timeFile", "times.txt");
+                properties.store(output, null);
+            } catch (IOException ex) {
+                throw new RuntimeException("Error creating the properties file", ex);
+            }
+        }
+        properties.load(new FileInputStream("config.properties"));
+        String timeFile = properties.getProperty("timeFile");
+        FileTimeDAO timeDAO = new FileTimeDAO(timeFile);
+        timeService = new TimeService(timeDAO);
     }
 
     public static void main(String[] args) {

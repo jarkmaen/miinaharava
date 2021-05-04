@@ -1,5 +1,8 @@
 package miinaharava.logic;
 
+/**
+ * Yksittäistä ruutua kuvaava luokka
+ */
 public class Tile {
 
     private int x;

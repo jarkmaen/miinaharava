@@ -9,13 +9,13 @@ public class BoardTest {
 
     @Test
     public void boardExists() {
-        board = new Board(9, 9, 10);
+        board = new Board(9, 9, 10, "EASY");
         assertTrue(board != null);
     }
 
     @Test
     public void correctAmountOfMines() {
-        board = new Board(9, 9, 10);
+        board = new Board(9, 9, 10, "EASY");
         int counter = 0;
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
@@ -29,7 +29,7 @@ public class BoardTest {
 
     @Test
     public void tilesAreNumberedCorrectly() {
-        board = new Board(2, 2, 1);
+        board = new Board(2, 2, 1, "EASY");
         boolean failed = false;
         for (int x = 0; x < 2; x++) {
             for (int y = 0; y < 2; y++) {
@@ -43,7 +43,7 @@ public class BoardTest {
 
     @Test
     public void gameEndsWhenAllSafeTilesAreOpen() {
-        board = new Board(9, 9, 10);
+        board = new Board(9, 9, 10, "EASY");
         int safeTiles = board.getWidth() * board.getHeight() - board.getMinesCount();
         for (int i = 0; i < safeTiles; i++) {
             board.updateOpenTiles();
