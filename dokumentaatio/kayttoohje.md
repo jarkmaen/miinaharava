@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto [Miinaharava.jar](https://github.com/jarkmaen/ot-harjoitustyo/releases/tag/viikko5)
+Lataa tiedosto [Miinaharava.jar](https://github.com/jarkmaen/ot-harjoitustyo/releases/tag/viikko7)
 
 ## Konfigurointi
 
