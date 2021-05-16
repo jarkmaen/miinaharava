@@ -3,7 +3,7 @@ package miinaharava.logic;
 /**
  * Tallennettua aikaa kuvaava luokka
  */
-public class Time {
+public class Time implements Comparable<Time> {
 
     private String difficulty;
     private String name;
@@ -31,5 +31,14 @@ public class Time {
 
     public int getSeconds() {
         return this.seconds;
+    }
+
+    @Override
+    public int compareTo(Time compareTime) {
+        if (this.minutes != compareTime.getMinutes()) {
+            return this.minutes - compareTime.getMinutes();
+        } else {
+            return this.seconds - compareTime.getSeconds();
+        }
     }
 }

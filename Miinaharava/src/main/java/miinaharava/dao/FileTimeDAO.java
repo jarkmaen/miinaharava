@@ -15,7 +15,6 @@ public class FileTimeDAO implements TimeDAO {
     public FileTimeDAO(String file) throws Exception {
         times = new ArrayList<>();
         this.file = file;
-        System.out.println(file);
         try {
             Scanner reader = new Scanner(new File(file));
             while (reader.hasNextLine()) {

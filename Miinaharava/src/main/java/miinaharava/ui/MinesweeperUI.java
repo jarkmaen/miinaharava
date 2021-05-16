@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,6 +18,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -33,12 +36,12 @@ import javafx.util.Duration;
 import miinaharava.dao.FileTimeDAO;
 import miinaharava.logic.Board;
 import miinaharava.logic.Tile;
+import miinaharava.logic.Time;
 import miinaharava.logic.TimeService;
 
 public class MinesweeperUI extends Application {
 
     private Board board;
-    private Scene menuScene;
     private Scene lostScene;
 
     private TimeService timeService;
@@ -54,26 +57,55 @@ public class MinesweeperUI extends Application {
         Text text = new Text("MIINAHARAVA");
         text.setFont(Font.font(44));
 
-        Button easy = new Button("HELPPO --- 9x9 ALUE --- 10 MIINAA");
-        easy.setPrefWidth(260);
-        easy.setOnAction(value -> {
+        HBox easyHBox = new HBox();
+        Button easyButton = new Button("HELPPO --- 9x9 ALUE --- 10 MIINAA");
+        easyButton.setPrefWidth(270);
+        easyButton.setOnAction(value -> {
             board = new Board(9, 9, 10, "EASY");
             stage.setScene(new Scene(getBoardWindow(stage)));
         });
-        Button medium = new Button("KOHTALAINEN --- 16x16 ALUE --- 40 MIINAA");
-        medium.setPrefWidth(260);
-        medium.setOnAction(value -> {
+        ComboBox easyRecords = new ComboBox();
+        insertTimes(easyRecords, "EASY");
+        easyRecords.setPromptText("PR");
+        easyRecords.setPrefWidth(60);
+        easyRecords.setMaxWidth(60);
+        easyHBox.getChildren().addAll(easyButton, easyRecords);
+        easyHBox.setAlignment(Pos.CENTER);
+        easyHBox.setSpacing(10);
+
+        HBox mediumHBox = new HBox();
+        Button mediumButton = new Button("KOHTALAINEN --- 16x16 ALUE --- 40 MIINAA");
+        mediumButton.setPrefWidth(270);
+        mediumButton.setOnAction(value -> {
             board = new Board(16, 16, 40, "MEDIUM");
             stage.setScene(new Scene(getBoardWindow(stage)));
         });
-        Button hard = new Button("VAIKEA --- 30x16 ALUE --- 99 MIINAA");
-        hard.setPrefWidth(260);
-        hard.setOnAction(value -> {
+        ComboBox mediumRecords = new ComboBox();
+        insertTimes(mediumRecords, "MEDIUM");
+        mediumRecords.setPromptText("PR");
+        mediumRecords.setPrefWidth(60);
+        mediumRecords.setMaxWidth(60);
+        mediumHBox.getChildren().addAll(mediumButton, mediumRecords);
+        mediumHBox.setAlignment(Pos.CENTER);
+        mediumHBox.setSpacing(10);
+
+        HBox hardHBox = new HBox();
+        Button hardButton = new Button("VAIKEA --- 30x16 ALUE --- 99 MIINAA");
+        hardButton.setPrefWidth(270);
+        hardButton.setOnAction(value -> {
             board = new Board(30, 16, 99, "HARD");
             stage.setScene(new Scene(getBoardWindow(stage)));
         });
+        ComboBox hardRecords = new ComboBox();
+        insertTimes(hardRecords, "HARD");
+        hardRecords.setPromptText("PR");
+        hardRecords.setPrefWidth(60);
+        hardRecords.setMaxWidth(60);
+        hardHBox.getChildren().addAll(hardButton, hardRecords);
+        hardHBox.setAlignment(Pos.CENTER);
+        hardHBox.setSpacing(10);
 
-        vBox.getChildren().addAll(text, easy, medium, hard);
+        vBox.getChildren().addAll(text, easyHBox, mediumHBox, hardHBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setPrefSize(600, 400);
         vBox.setSpacing(10);
@@ -88,7 +120,7 @@ public class MinesweeperUI extends Application {
         BorderPane headerPane = new BorderPane();
         Button button = new Button("Päävalikkoon");
         button.setOnAction(value -> {
-            stage.setScene(menuScene);
+            stage.setScene(new Scene(getMenuWindow(stage)));
         });
         Text minesLeft = new Text("X: " + test);
         timer = new Text("0:0");
@@ -181,7 +213,7 @@ public class MinesweeperUI extends Application {
         text.setFont(Font.font(22));
         Button button = new Button("PALAA PÄÄVALIKKOON");
         button.setOnAction(value -> {
-            stage.setScene(menuScene);
+            stage.setScene(new Scene(getMenuWindow(stage)));
         });
         vBox.getChildren().addAll(text, button);
         vBox.setAlignment(Pos.CENTER);
@@ -208,7 +240,7 @@ public class MinesweeperUI extends Application {
         saveButton.setOnAction(value -> {
             if (!textField.getText().isEmpty()) {
                 timeService.createTime(board.getDifficulty(), textField.getText(), minutes, seconds);
-                stage.setScene(menuScene);
+                stage.setScene(new Scene(getMenuWindow(stage)));
             }
         });
         hBox.getChildren().addAll(textField, saveButton);
@@ -217,7 +249,7 @@ public class MinesweeperUI extends Application {
 
         Button button = new Button("PALAA PÄÄVALIKKOON");
         button.setOnAction(value -> {
-            stage.setScene(menuScene);
+            stage.setScene(new Scene(getMenuWindow(stage)));
         });
 
         vBox.getChildren().addAll(won, time, hBox, button);
@@ -246,11 +278,9 @@ public class MinesweeperUI extends Application {
 
     @Override
     public void start(Stage stage) {
-        menuScene = new Scene(getMenuWindow(stage));
         lostScene = new Scene(getLostWindow(stage));
-        stage.setScene(menuScene);
+        stage.setScene(new Scene(getMenuWindow(stage)));
         stage.setTitle("Miinaharava");
-        stage.setResizable(false);
         stage.show();
         stopwatch();
     }
@@ -271,6 +301,17 @@ public class MinesweeperUI extends Application {
         String timeFile = properties.getProperty("timeFile");
         FileTimeDAO timeDAO = new FileTimeDAO(timeFile);
         timeService = new TimeService(timeDAO);
+    }
+
+    private void insertTimes(ComboBox cBox, String difficulty) {
+        List<Time> times = timeService.getTimes();
+        Collections.sort(times);
+        for (Time time : times) {
+            if (time.getDifficulty().equals(difficulty)) {
+                String record = time.getName() + " " + time.getMinutes() + ":" + time.getSeconds();
+                cBox.getItems().add(record);
+            }
+        }
     }
 
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package miinaharava.logic;
 
+import java.util.List;
 import miinaharava.dao.TimeDAO;
 
 public class TimeService {
@@ -18,5 +19,9 @@ public class TimeService {
             return false;
         }
         return true;
+    }
+
+    public List<Time> getTimes() {
+        return timeDAO.getAll();
     }
 }
