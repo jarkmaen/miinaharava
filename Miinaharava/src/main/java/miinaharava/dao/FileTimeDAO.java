@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Scanner;
 import miinaharava.logic.Time;
 
+/**
+ * Aikojen tallennus tiedostosta vastaava luokka
+ */
 public class FileTimeDAO implements TimeDAO {
 
     private List<Time> times;
@@ -19,7 +22,10 @@ public class FileTimeDAO implements TimeDAO {
             Scanner reader = new Scanner(new File(file));
             while (reader.hasNextLine()) {
                 String[] parts = reader.nextLine().split(",");
-                Time t = new Time(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]));
+                Time t = new Time(parts[0],
+                        parts[1],
+                        Integer.parseInt(parts[2]),
+                        Integer.parseInt(parts[3]));
                 times.add(t);
             }
         } catch (Exception e) {
@@ -31,7 +37,10 @@ public class FileTimeDAO implements TimeDAO {
     private void save() throws Exception {
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (Time time : times) {
-                writer.write(time.getDifficulty() + "," + time.getName() + "," + time.getMinutes() + "," + time.getSeconds() + "\n");
+                writer.write(time.getDifficulty() + ","
+                        + time.getName() + ","
+                        + time.getMinutes() + ","
+                        + time.getSeconds() + "\n");
             }
         }
     }

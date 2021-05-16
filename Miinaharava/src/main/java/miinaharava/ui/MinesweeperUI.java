@@ -39,6 +39,9 @@ import miinaharava.logic.Tile;
 import miinaharava.logic.Time;
 import miinaharava.logic.TimeService;
 
+/**
+ * Pelin käyttöliittymästä vastaava luokka
+ */
 public class MinesweeperUI extends Application {
 
     private Board board;
