@@ -12,6 +12,8 @@ Helsingin yliopiston Ohjelmistotekniikka-kurssin harjoitustyö. Sovellus on peri
 
 [Arkkitehtuurikuvaus](https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
+[Testausdokumentti](https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md)
+
 ## Releaset
 
 [Viikko 5](https://github.com/jarkmaen/ot-harjoitustyo/releases/tag/viikko5)
