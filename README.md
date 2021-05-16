@@ -20,6 +20,8 @@ Helsingin yliopiston Ohjelmistotekniikka-kurssin harjoitustyö. Sovellus on peri
 
 [Viikko 6](https://github.com/jarkmaen/ot-harjoitustyo/releases/tag/viikko6)
 
+[Loppupalautus](https://github.com/jarkmaen/ot-harjoitustyo/releases/tag/viikko7)
+
 ## Komentorivitoiminnot
 
 ### Ohjelman suorittaminen
