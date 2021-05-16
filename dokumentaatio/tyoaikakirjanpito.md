@@ -12,4 +12,7 @@
 | 27.04.2021 | 2h   | Päävalikko ja eri vaikeustasot                           |
 | 27.04.2021 | 1h   | GUI elementtien toiminnallisuuksia                       |
 | 04.05.2021 | 6h   | Pelikentän ajastin ja DAO-suunnittelumallin käyttöönotto |
-| Yhteensä   | 26h  |                                                          |
+| 14.05.2021 | 4h   | Aikojen näyttäminen päävalikossa                         |
+| 15.05.2021 | 2h   | JUnit testejä                                            |
+| 16.05.2021 | 3h   | Loppupalautus                                            |
+| Yhteensä   | 35h  |                                                          |
