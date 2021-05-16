@@ -16,7 +16,7 @@ Helsingin yliopiston Ohjelmistotekniikka-kurssin harjoitustyö. Sovellus on peri
 
 [Viikko 5](https://github.com/jarkmaen/ot-harjoitustyo/releases/tag/viikko5)
 
-[Viikko 6](https://github.com/jarkmaen/ot-harjoitustyo/releases/tag/viikko5)
+[Viikko 6](https://github.com/jarkmaen/ot-harjoitustyo/releases/tag/viikko6)
 
 ## Komentorivitoiminnot
 
