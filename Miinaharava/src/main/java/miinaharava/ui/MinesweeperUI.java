@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -33,11 +34,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import miinaharava.dao.FileTimeDAO;
+
+import miinaharava.dao.GameResultTextFileDAO;
 import miinaharava.logic.Board;
 import miinaharava.logic.Tile;
-import miinaharava.logic.Time;
-import miinaharava.logic.TimeService;
+import miinaharava.logic.GameResult;
+import miinaharava.logic.GameResultService;
 
 /**
  * Pelin käyttöliittymästä vastaava luokka
@@ -45,16 +47,14 @@ import miinaharava.logic.TimeService;
 public class MinesweeperUI extends Application {
 
     private Board board;
-    private Scene lostScene;
-
-    private TimeService timeService;
-
-    private Timeline timeline;
+    private GameResultService gameResultService;
+    private Scene gameOverScene;
     private Text timer;
+    private Timeline timeline;
     private int minutes = 0;
     private int seconds = 0;
 
-    private Parent getMenuWindow(Stage stage) {
+    private Parent getMainMenuWindow(Stage stage) {
         VBox vBox = new VBox();
 
         Text text = new Text("MIINAHARAVA");
@@ -64,15 +64,15 @@ public class MinesweeperUI extends Application {
         Button easyButton = new Button("HELPPO --- 9x9 ALUE --- 10 MIINAA");
         easyButton.setPrefWidth(270);
         easyButton.setOnAction(value -> {
-            board = new Board(9, 9, 10, "EASY");
+            board = new Board(9, 9, "EASY", 10);
             stage.setScene(new Scene(getBoardWindow(stage)));
         });
-        ComboBox easyRecords = new ComboBox();
-        insertTimes(easyRecords, "EASY");
-        easyRecords.setPromptText("PR");
-        easyRecords.setPrefWidth(60);
-        easyRecords.setMaxWidth(60);
-        easyHBox.getChildren().addAll(easyButton, easyRecords);
+        ComboBox<String> easyComboBox = new ComboBox<>();
+        addPersonalBestResults(easyComboBox, "EASY");
+        easyComboBox.setPromptText("PB");
+        easyComboBox.setPrefWidth(60);
+        easyComboBox.setMaxWidth(60);
+        easyHBox.getChildren().addAll(easyButton, easyComboBox);
         easyHBox.setAlignment(Pos.CENTER);
         easyHBox.setSpacing(10);
 
@@ -80,15 +80,15 @@ public class MinesweeperUI extends Application {
         Button mediumButton = new Button("KOHTALAINEN --- 16x16 ALUE --- 40 MIINAA");
         mediumButton.setPrefWidth(270);
         mediumButton.setOnAction(value -> {
-            board = new Board(16, 16, 40, "MEDIUM");
+            board = new Board(16, 16, "MEDIUM", 40);
             stage.setScene(new Scene(getBoardWindow(stage)));
         });
-        ComboBox mediumRecords = new ComboBox();
-        insertTimes(mediumRecords, "MEDIUM");
-        mediumRecords.setPromptText("PR");
-        mediumRecords.setPrefWidth(60);
-        mediumRecords.setMaxWidth(60);
-        mediumHBox.getChildren().addAll(mediumButton, mediumRecords);
+        ComboBox<String> mediumComboBox = new ComboBox<>();
+        addPersonalBestResults(mediumComboBox, "MEDIUM");
+        mediumComboBox.setPromptText("PB");
+        mediumComboBox.setPrefWidth(60);
+        mediumComboBox.setMaxWidth(60);
+        mediumHBox.getChildren().addAll(mediumButton, mediumComboBox);
         mediumHBox.setAlignment(Pos.CENTER);
         mediumHBox.setSpacing(10);
 
@@ -96,15 +96,15 @@ public class MinesweeperUI extends Application {
         Button hardButton = new Button("VAIKEA --- 30x16 ALUE --- 99 MIINAA");
         hardButton.setPrefWidth(270);
         hardButton.setOnAction(value -> {
-            board = new Board(30, 16, 99, "HARD");
+            board = new Board(30, 16, "HARD", 99);
             stage.setScene(new Scene(getBoardWindow(stage)));
         });
-        ComboBox hardRecords = new ComboBox();
-        insertTimes(hardRecords, "HARD");
-        hardRecords.setPromptText("PR");
-        hardRecords.setPrefWidth(60);
-        hardRecords.setMaxWidth(60);
-        hardHBox.getChildren().addAll(hardButton, hardRecords);
+        ComboBox<String> hardComboBox = new ComboBox<>();
+        addPersonalBestResults(hardComboBox, "HARD");
+        hardComboBox.setPromptText("PB");
+        hardComboBox.setPrefWidth(60);
+        hardComboBox.setMaxWidth(60);
+        hardHBox.getChildren().addAll(hardButton, hardComboBox);
         hardHBox.setAlignment(Pos.CENTER);
         hardHBox.setSpacing(10);
 
@@ -117,28 +117,25 @@ public class MinesweeperUI extends Application {
     }
 
     private Parent getBoardWindow(Stage stage) {
-        int test = board.getMinesCount();
-        BorderPane borderPane = new BorderPane();
-
         BorderPane headerPane = new BorderPane();
         Button button = new Button("Päävalikkoon");
         button.setOnAction(value -> {
-            stage.setScene(new Scene(getMenuWindow(stage)));
+            stage.setScene(new Scene(getMainMenuWindow(stage)));
         });
-        Text minesLeft = new Text("X: " + test);
+        Text minesLeft = new Text("X: " + board.getMines());
         timer = new Text("0:0");
         headerPane.setLeft(button);
         headerPane.setCenter(minesLeft);
         headerPane.setRight(timer);
-        headerPane.setAlignment(timer, Pos.CENTER);
+        BorderPane.setAlignment(timer, Pos.CENTER);
         headerPane.setPadding(new Insets(5, 5, 5, 5));
         headerPane.setPrefHeight(35);
 
         GridPane gridPane = new GridPane();
         int tileSize = 30;
 
-        for (int y = 0; y < board.getHeight(); y++) {
-            for (int x = 0; x < board.getWidth(); x++) {
+        for (int y = 0; y < board.getBoardHeight(); y++) {
+            for (int x = 0; x < board.getBoardWidth(); x++) {
                 StackPane tile = new StackPane();
 
                 Rectangle rectangle = new Rectangle(30, 30);
@@ -150,33 +147,38 @@ public class MinesweeperUI extends Application {
                 flag.setVisible(false);
                 flag.setText("P");
 
-                Text value = new Text();
-                value.setText(board.getGrid()[x][y].hasMine() ? "X" : String.valueOf(board.getGrid()[x][y].getNumber()));
-                value.setFont(Font.font(16));
-                value.setVisible(false);
+                Text tileContent = new Text();
+                tileContent.setText(
+                        board.getBoard()[x][y].hasMine() ? "X"
+                                : String.valueOf(board.getBoard()[x][y].getAdjacentMinesCount()));
+                tileContent.setFont(Font.font(16));
+                tileContent.setVisible(false);
 
                 EventHandler<MouseEvent> eventHandler = (MouseEvent e) -> {
-                    if (e.getButton() == MouseButton.PRIMARY && !flag.isVisible() && !value.isVisible()) {
+                    if (e.getButton() == MouseButton.PRIMARY && !flag.isVisible() && !tileContent.isVisible()) {
                         rectangle.setFill(Color.WHITE);
-                        value.setVisible(true);
+                        tileContent.setVisible(true);
                         board.updateOpenTiles();
+
                         if (board.isGameOver()) {
                             timeline.stop();
-                            stage.setScene(new Scene(getWinWindow(stage)));
+                            stage.setScene(new Scene(getVictoryWindow(stage)));
                         }
-                    } else if (e.getButton() == MouseButton.SECONDARY && !value.isVisible()) {
+                    } else if (e.getButton() == MouseButton.SECONDARY && !tileContent.isVisible()) {
                         flag.setVisible(!flag.isVisible());
+
                         if (flag.isVisible()) {
-                            board.updateFlagsSet(1);
+                            board.updateFlags(1);
                         } else {
-                            board.updateFlagsSet(-1);
+                            board.updateFlags(-1);
                         }
-                        minesLeft.setText("X: " + (board.getMinesCount() - board.getFlagsSet()));
+
+                        minesLeft.setText("X: " + (board.getMines() - board.getFlags()));
                     }
                 };
 
                 tile.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
-                tile.getChildren().addAll(rectangle, value, flag);
+                tile.getChildren().addAll(rectangle, tileContent, flag);
                 tile.setAlignment(Pos.CENTER);
                 tile.setTranslateX(x * tileSize);
                 tile.setTranslateY(y * tileSize);
@@ -188,18 +190,21 @@ public class MinesweeperUI extends Application {
         EventHandler<MouseEvent> eventHandler = (MouseEvent e) -> {
             if (e.getButton() == MouseButton.PRIMARY) {
                 Tile tile = board.getTile((int) (e.getX() / tileSize), (int) (e.getY() / tileSize));
+
                 if (tile.hasMine()) {
                     timeline.stop();
-                    stage.setScene(lostScene);
+                    stage.setScene(gameOverScene);
                 }
             }
         };
+
         gridPane.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
 
+        BorderPane borderPane = new BorderPane();
         borderPane.setTop(headerPane);
         borderPane.setCenter(gridPane);
-        int prefW = tileSize * board.getWidth() + 1;
-        int prefH = tileSize * board.getHeight() + 35 + 1;
+        int prefW = tileSize * board.getBoardWidth() + 1;
+        int prefH = tileSize * board.getBoardHeight() + 35 + 1;
         borderPane.setPrefSize(prefW, prefH);
 
         minutes = 0;
@@ -209,28 +214,32 @@ public class MinesweeperUI extends Application {
         return borderPane;
     }
 
-    private Parent getLostWindow(Stage stage) {
+    private Parent getGameOverWindow(Stage stage) {
         VBox vBox = new VBox();
+
         Text text = new Text();
         text.setText("HÄVISIT PELIN");
         text.setFont(Font.font(22));
+
         Button button = new Button("PALAA PÄÄVALIKKOON");
         button.setOnAction(value -> {
-            stage.setScene(new Scene(getMenuWindow(stage)));
+            stage.setScene(new Scene(getMainMenuWindow(stage)));
         });
+
         vBox.getChildren().addAll(text, button);
         vBox.setAlignment(Pos.CENTER);
         vBox.setPrefSize(300, 200);
         vBox.setSpacing(10);
+
         return vBox;
     }
 
-    private Parent getWinWindow(Stage stage) {
+    private Parent getVictoryWindow(Stage stage) {
         VBox vBox = new VBox();
 
-        Text won = new Text();
-        won.setText("VOITIT PELIN");
-        won.setFont(Font.font(22));
+        Text youWon = new Text();
+        youWon.setText("VOITIT PELIN");
+        youWon.setFont(Font.font(22));
 
         Text time = new Text();
         time.setText("AIKA: " + minutes + ":" + seconds);
@@ -242,8 +251,8 @@ public class MinesweeperUI extends Application {
         Button saveButton = new Button("TALLENNA JA PALAA PÄÄVALIKKOON");
         saveButton.setOnAction(value -> {
             if (!textField.getText().isEmpty()) {
-                timeService.createTime(board.getDifficulty(), textField.getText(), minutes, seconds);
-                stage.setScene(new Scene(getMenuWindow(stage)));
+                gameResultService.createGameResult(board.getDifficulty(), textField.getText(), minutes, seconds);
+                stage.setScene(new Scene(getMainMenuWindow(stage)));
             }
         });
         hBox.getChildren().addAll(textField, saveButton);
@@ -252,15 +261,27 @@ public class MinesweeperUI extends Application {
 
         Button button = new Button("PALAA PÄÄVALIKKOON");
         button.setOnAction(value -> {
-            stage.setScene(new Scene(getMenuWindow(stage)));
+            stage.setScene(new Scene(getMainMenuWindow(stage)));
         });
 
-        vBox.getChildren().addAll(won, time, hBox, button);
+        vBox.getChildren().addAll(youWon, time, hBox, button);
         vBox.setAlignment(Pos.CENTER);
         vBox.setPrefSize(400, 300);
         vBox.setSpacing(10);
 
         return vBox;
+    }
+
+    private void addPersonalBestResults(ComboBox<String> comboBox, String difficulty) {
+        List<GameResult> gameResults = gameResultService.getGameResults();
+        Collections.sort(gameResults);
+
+        for (GameResult gameResult : gameResults) {
+            if (gameResult.getDifficulty().equals(difficulty)) {
+                String record = gameResult.getName() + " " + gameResult.getMinutes() + ":" + gameResult.getSeconds();
+                comboBox.getItems().add(record);
+            }
+        }
     }
 
     private void stopwatch() {
@@ -271,53 +292,46 @@ public class MinesweeperUI extends Application {
                     minutes++;
                     seconds = 0;
                 }
+
                 timer.setText(minutes + ":" + seconds);
                 seconds++;
             }
         }));
+
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(false);
     }
 
-    @Override
-    public void start(Stage stage) {
-        lostScene = new Scene(getLostWindow(stage));
-        stage.setScene(new Scene(getMenuWindow(stage)));
-        stage.setTitle("Miinaharava");
-        stage.show();
-        stopwatch();
+    public static void main(String[] args) {
+        launch(args);
     }
 
     @Override
     public void init() throws Exception {
         Properties properties = new Properties();
         File file = new File("config.properties");
+
         if (!file.exists()) {
             try (final OutputStream output = new FileOutputStream("config.properties")) {
-                properties.setProperty("timeFile", "times.txt");
+                properties.setProperty("gameResultsFile", "game_results.txt");
                 properties.store(output, null);
-            } catch (IOException ex) {
-                throw new RuntimeException("Error creating the properties file", ex);
+            } catch (IOException e) {
+                throw new RuntimeException("Could not create the config.properties file...", e);
             }
         }
+
         properties.load(new FileInputStream("config.properties"));
-        String timeFile = properties.getProperty("timeFile");
-        FileTimeDAO timeDAO = new FileTimeDAO(timeFile);
-        timeService = new TimeService(timeDAO);
+        String gameResultsFile = properties.getProperty("gameResultsFile");
+        GameResultTextFileDAO gameResultTextFileDAO = new GameResultTextFileDAO(gameResultsFile);
+        gameResultService = new GameResultService(gameResultTextFileDAO);
     }
 
-    private void insertTimes(ComboBox cBox, String difficulty) {
-        List<Time> times = timeService.getTimes();
-        Collections.sort(times);
-        for (Time time : times) {
-            if (time.getDifficulty().equals(difficulty)) {
-                String record = time.getName() + " " + time.getMinutes() + ":" + time.getSeconds();
-                cBox.getItems().add(record);
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
+    @Override
+    public void start(Stage stage) {
+        gameOverScene = new Scene(getGameOverWindow(stage));
+        stage.setScene(new Scene(getMainMenuWindow(stage)));
+        stage.setTitle("Miinaharava");
+        stage.show();
+        stopwatch();
     }
 }

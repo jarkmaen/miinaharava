@@ -5,49 +5,74 @@ import static org.junit.Assert.*;
 
 public class BoardTest {
 
-    Board board;
+    private Board board;
 
     @Test
-    public void boardExists() {
-        board = new Board(9, 9, 10, "EASY");
-        assertTrue(board != null);
+    public void constructorInitializesBoard() {
+        board = new Board(9, 9, "EASY", 10);
+
+        assertNotNull(board);
+        assertEquals(9, board.getBoardWidth());
+        assertEquals(9, board.getBoardHeight());
+        assertEquals("EASY", board.getDifficulty());
+        assertEquals(10, board.getMines());
     }
 
     @Test
-    public void correctAmountOfMines() {
-        board = new Board(9, 9, 10, "EASY");
+    public void boardContainsCorrectNumberOfMines() {
+        board = new Board(9, 9, "EASY", 10);
         int counter = 0;
+
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
-                if (board.getGrid()[x][y].hasMine()) {
+                if (board.getBoard()[x][y].hasMine()) {
                     counter++;
                 }
             }
         }
+
         assertTrue(counter == 10);
     }
 
     @Test
-    public void tilesAreNumberedCorrectly() {
-        board = new Board(2, 2, 1, "EASY");
-        boolean failed = false;
+    public void adjacentMinesAreCountedCorrectly() {
+        board = new Board(2, 2, "EASY", 1);
+        int mineX = -1;
+        int mineY = -1;
+
         for (int x = 0; x < 2; x++) {
             for (int y = 0; y < 2; y++) {
-                if (!board.getGrid()[x][y].hasMine() && board.getGrid()[x][y].getNumber() != 1) {
-                    failed = true;
+                if (board.getBoard()[x][y].hasMine()) {
+                    mineX = x;
+                    mineY = y;
                 }
             }
         }
-        assertTrue(failed == false);
+
+        boolean allCorrect = true;
+
+        for (int x = 0; x < 2; x++) {
+            for (int y = 0; y < 2; y++) {
+                if (!(x == mineX && y == mineY)) {
+                    if (board.getBoard()[x][y].getAdjacentMinesCount() != 1) {
+                        allCorrect = false;
+                    }
+                }
+            }
+        }
+
+        assertTrue(allCorrect);
     }
 
     @Test
-    public void gameEndsWhenAllSafeTilesAreOpen() {
-        board = new Board(9, 9, 10, "EASY");
-        int safeTiles = board.getWidth() * board.getHeight() - board.getMinesCount();
+    public void gameEndsWhenAllNonMineTilesAreCleared() {
+        board = new Board(9, 9, "EASY", 10);
+        int safeTiles = board.getBoardWidth() * board.getBoardHeight() - board.getMines();
+
         for (int i = 0; i < safeTiles; i++) {
             board.updateOpenTiles();
         }
+
         assertTrue(board.isGameOver() == true);
     }
 }

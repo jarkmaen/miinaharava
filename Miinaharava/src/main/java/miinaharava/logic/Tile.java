@@ -5,10 +5,10 @@ package miinaharava.logic;
  */
 public class Tile {
 
+    private boolean hasMine;
+    private int adjacentMinesCount;
     private int x;
     private int y;
-    private int number;
-    private boolean hasMine;
 
     public Tile(int x, int y, boolean hasMine) {
         this.x = x;
@@ -16,15 +16,23 @@ public class Tile {
         this.hasMine = hasMine;
     }
 
+    public int getAdjacentMinesCount() {
+        return adjacentMinesCount;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     public boolean hasMine() {
-        return this.hasMine;
+        return hasMine;
     }
 
-    public void setNumber(int n) {
-        this.number = n;
-    }
-
-    public int getNumber() {
-        return this.number;
+    public void setAdjacentMinesCount(int adjacentMinesCount) {
+        this.adjacentMinesCount = adjacentMinesCount;
     }
 }
