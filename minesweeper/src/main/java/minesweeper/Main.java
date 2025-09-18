@@ -1,6 +1,6 @@
-package miinaharava;
+package minesweeper;
 
-import miinaharava.ui.MinesweeperUI;
+import minesweeper.ui.MinesweeperUI;
 
 public class Main {
     public static void main(String[] args) {

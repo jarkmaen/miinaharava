@@ -1,4 +1,4 @@
-package miinaharava.logic;
+package minesweeper.logic;
 
 /**
  * Class representing a single tile on the board

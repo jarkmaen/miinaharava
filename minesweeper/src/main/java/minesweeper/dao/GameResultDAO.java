@@ -1,8 +1,8 @@
-package miinaharava.dao;
+package minesweeper.dao;
 
 import java.util.List;
 
-import miinaharava.logic.GameResult;
+import minesweeper.logic.GameResult;
 
 public interface GameResultDAO {
 

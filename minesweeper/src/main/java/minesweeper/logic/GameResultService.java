@@ -1,8 +1,8 @@
-package miinaharava.logic;
+package minesweeper.logic;
 
 import java.util.List;
 
-import miinaharava.dao.GameResultDAO;
+import minesweeper.dao.GameResultDAO;
 
 /**
  * Class responsible for managing game results

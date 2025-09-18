@@ -1,9 +1,9 @@
-package miinaharava.dao;
+package minesweeper.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import miinaharava.logic.GameResult;
+import minesweeper.logic.GameResult;
 
 public class FakeGameResultDAO implements GameResultDAO {
 

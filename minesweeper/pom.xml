@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>miinaharava</groupId>
-    <artifactId>miinaharava</artifactId>
+    <groupId>minesweeper</groupId>
+    <artifactId>minesweeper</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -48,7 +48,7 @@
                 <version>0.8.13</version>
                 <configuration>
                     <excludes>
-                        <exclude>miinaharava/ui/*</exclude>
+                        <exclude>minesweeper/ui/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -71,7 +71,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>miinaharava.Main</mainClass>
+                    <mainClass>minesweeper.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>

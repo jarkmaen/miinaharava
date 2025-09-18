@@ -1,4 +1,4 @@
-package miinaharava.logic;
+package minesweeper.logic;
 
 /**
  * Class responsible for storing game result data

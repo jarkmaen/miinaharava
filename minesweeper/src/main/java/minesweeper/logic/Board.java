@@ -1,4 +1,4 @@
-package miinaharava.logic;
+package minesweeper.logic;
 
 import java.util.HashSet;
 import java.util.Random;

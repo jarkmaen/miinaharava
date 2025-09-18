@@ -1,4 +1,4 @@
-package miinaharava.dao;
+package minesweeper.dao;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import static org.junit.Assert.*;
 
-import miinaharava.logic.GameResult;
+import minesweeper.logic.GameResult;
 
 public class GameResultTextFileDAOTest {
 

@@ -1,4 +1,4 @@
-package miinaharava.dao;
+package minesweeper.dao;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import miinaharava.logic.GameResult;
+import minesweeper.logic.GameResult;
 
 /**
  * Class responsible for saving and loading game results to and from a text file

@@ -1,4 +1,4 @@
-package miinaharava.ui;
+package minesweeper.ui;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,11 +35,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import miinaharava.dao.GameResultTextFileDAO;
-import miinaharava.logic.Board;
-import miinaharava.logic.Tile;
-import miinaharava.logic.GameResult;
-import miinaharava.logic.GameResultService;
+import minesweeper.dao.GameResultTextFileDAO;
+import minesweeper.logic.Board;
+import minesweeper.logic.Tile;
+import minesweeper.logic.GameResult;
+import minesweeper.logic.GameResultService;
 
 /**
  * Class responsible for the game's user interface.
