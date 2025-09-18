@@ -1,79 +1,75 @@
-## Miinaharava
+# Minesweeper - Software Engineering Project
 
-Helsingin yliopiston Ohjelmistotekniikka-kurssin harjoitustyö. Sovellus on perinteinen miinaharava-peli, jossa tarkoituksena on etsiä kaikki pelialueelle piilotetut miinat.
+## Overview
 
-## Dokumentaatio
+A classic Minesweeper game implemented in Java. Developed as part of the University of Helsinki software engineering project course.
 
-[Käyttöohje](https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+A runnable .jar file can be downloaded from the [releases](https://github.com/jarkmaen/minesweeper/releases) page.
 
-[Vaatimusmäärittely](https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+## Documentation
 
-[Tuntikirjanpito](https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+[Architecture](documentation/architecture.md)
 
-[Arkkitehtuurikuvaus](https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+[Requirements specification](documentation/requirements-specification.md)
 
-[Testausdokumentti](https://github.com/jarkmaen/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md)
+[Testing](documentation/testing.md)
 
-## Releaset
+[User guide](documentation/user-guide.md)
 
-[Viikko 5](https://github.com/jarkmaen/ot-harjoitustyo/releases/tag/viikko5)
+## Command line operations
 
-[Viikko 6](https://github.com/jarkmaen/ot-harjoitustyo/releases/tag/viikko6)
+To run the commands below, you'll need to have both [Java Development Kit (JDK)](https://www.oracle.com/java/) and [Maven](https://maven.apache.org/) installed on your computer. Run all commands from the root directory of the project (the folder containing the pom.xml file).
 
-[Loppupalautus](https://github.com/jarkmaen/ot-harjoitustyo/releases/tag/viikko7)
+### Running the application
 
-## Komentorivitoiminnot
-
-### Ohjelman suorittaminen
-
-Ohjelma ajetaan komennolla
+To run the application, use the command:
 
 ```
-mvn compile exec:java -Dexec.mainClass=miinaharava.Main
+mvn compile exec:java -Dexec.mainClass=minesweeper.Main
 ```
 
-### Suoritettavan jarin generointi
+### Building the .jar file
 
-Komento
+To create an executable .jar file, use the command:
 
 ```
 mvn package
 ```
 
-luo hakemistoon _target_ suoritettavan jar-tiedoston _Miinaharava-1.0-SNAPSHOT.jar_
+This will generate the file minesweeper-1.0-SNAPSHOT.jar in the target/ directory.
 
-### Testaus
+### Testing
 
-Testit suoritetaan komennolla
+To run unit tests, use the command:
 
 ```
 mvn test
 ```
 
-Testikattavuusraportti luodaan komennolla
+To generate a test coverage report, use the command:
 
 ```
 mvn jacoco:report
 ```
 
-Raportin tulos löytyy _target/site/jacoco/_ -hakemistosta nimellä _index.html_
+The report's output can be found in the target/site/jacoco/ directory under the name index.html.
 
 ### JavaDoc
 
-JavaDoc luodaan komennolla
+To generate the JavaDoc documentation, use the command:
 
 ```
 mvn javadoc:javadoc
 ```
 
-Raportin tulos löytyy _target/site/apidocs/_ -hakemistosta nimellä _index.html_
+The report's output can be found in the target/site/apidocs/ directory under the name index.html.
 
 ### Checkstyle
 
-Checkstyle tarkistus suoritetaan komennolla
+To perform the Checkstyle check, use the command:
 
 ```
 mvn jxr:jxr checkstyle:checkstyle
 ```
 
-Raportin tulos löytyy _target/site/_ -hakemistosta nimellä _checkstyle.html_
+The report's output can be found in the target/site/ directory under the name checkstyle.html.
