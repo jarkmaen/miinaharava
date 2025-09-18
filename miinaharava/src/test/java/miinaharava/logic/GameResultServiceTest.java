@@ -17,7 +17,7 @@ public class GameResultServiceTest {
     public void setUp() {
         fakeGameResultDAO = new FakeGameResultDAO();
         gameResultService = new GameResultService(fakeGameResultDAO);
-        fakeGameResultDAO.create(new GameResult("EASY", "Test", 1, 1));
+        fakeGameResultDAO.create(new GameResult("BEGINNER", "Test", 1, 1));
     }
 
     @Test
@@ -26,7 +26,7 @@ public class GameResultServiceTest {
         assertEquals(1, gameResults.size());
 
         GameResult gameResult = gameResults.get(0);
-        assertEquals("EASY", gameResult.getDifficulty());
+        assertEquals("BEGINNER", gameResult.getDifficulty());
         assertEquals("Test", gameResult.getName());
         assertEquals(1, gameResult.getMinutes());
         assertEquals(1, gameResult.getSeconds());
@@ -34,13 +34,13 @@ public class GameResultServiceTest {
 
     @Test
     public void getGameResultsReturnsListWithNewlyAddedResult() {
-        addGameResult("MEDIUM", "Test", 2, 50);
+        addGameResult("INTERMEDIATE", "Test", 2, 50);
 
         List<GameResult> gameResults = gameResultService.getGameResults();
         assertEquals(2, gameResults.size());
 
         GameResult gameResult = gameResults.get(1);
-        assertEquals("MEDIUM", gameResult.getDifficulty());
+        assertEquals("INTERMEDIATE", gameResult.getDifficulty());
         assertEquals("Test", gameResult.getName());
         assertEquals(2, gameResult.getMinutes());
         assertEquals(50, gameResult.getSeconds());

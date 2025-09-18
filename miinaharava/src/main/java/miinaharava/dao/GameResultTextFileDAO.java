@@ -9,8 +9,7 @@ import java.util.Scanner;
 import miinaharava.logic.GameResult;
 
 /**
- * Pelitulosten tekstitiedostoon tallentamisesta ja sieltä lukemisesta vastaava
- * luokka
+ * Class responsible for saving and loading game results to and from a text file
  */
 public class GameResultTextFileDAO implements GameResultDAO {
 

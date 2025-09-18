@@ -1,7 +1,7 @@
 package miinaharava.logic;
 
 /**
- * Pelituloksen tiedoista vastaava luokka
+ * Class responsible for storing game result data
  */
 public class GameResult implements Comparable<GameResult> {
 

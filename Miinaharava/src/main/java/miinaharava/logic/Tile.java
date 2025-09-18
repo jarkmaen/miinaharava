@@ -1,7 +1,7 @@
 package miinaharava.logic;
 
 /**
- * Yksittäistä ruutua kuvaava luokka
+ * Class representing a single tile on the board
  */
 public class Tile {
 

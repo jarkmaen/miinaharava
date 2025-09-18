@@ -9,18 +9,18 @@ public class BoardTest {
 
     @Test
     public void constructorInitializesBoard() {
-        board = new Board(9, 9, "EASY", 10);
+        board = new Board(9, 9, "BEGINNER", 10);
 
         assertNotNull(board);
         assertEquals(9, board.getBoardWidth());
         assertEquals(9, board.getBoardHeight());
-        assertEquals("EASY", board.getDifficulty());
+        assertEquals("BEGINNER", board.getDifficulty());
         assertEquals(10, board.getMines());
     }
 
     @Test
     public void boardContainsCorrectNumberOfMines() {
-        board = new Board(9, 9, "EASY", 10);
+        board = new Board(9, 9, "BEGINNER", 10);
         int counter = 0;
 
         for (int x = 0; x < 9; x++) {
@@ -36,7 +36,7 @@ public class BoardTest {
 
     @Test
     public void adjacentMinesAreCountedCorrectly() {
-        board = new Board(2, 2, "EASY", 1);
+        board = new Board(2, 2, "BEGINNER", 1);
         int mineX = -1;
         int mineY = -1;
 
@@ -66,7 +66,7 @@ public class BoardTest {
 
     @Test
     public void gameEndsWhenAllNonMineTilesAreCleared() {
-        board = new Board(9, 9, "EASY", 10);
+        board = new Board(9, 9, "BEGINNER", 10);
         int safeTiles = board.getBoardWidth() * board.getBoardHeight() - board.getMines();
 
         for (int i = 0; i < safeTiles; i++) {

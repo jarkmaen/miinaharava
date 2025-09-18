@@ -5,7 +5,7 @@ import java.util.List;
 import miinaharava.dao.GameResultDAO;
 
 /**
- * Pelitulosten hallinnasta vastaava luokka
+ * Class responsible for managing game results
  */
 public class GameResultService {
 
@@ -16,13 +16,14 @@ public class GameResultService {
     }
 
     /**
-     * Luo uuden pelituloksen ja tallentaa sen tekstitiedostoon
+     * Creates a new game result and saves it to a text file
      *
-     * @param difficulty pelin vaikeustaso
-     * @param name       pelaajan nimi
-     * @param minutes    pelin läpäisyyn kuluneet minuutit
-     * @param seconds    pelin läpäisyyn kuluneet sekunnit
-     * @return true jos tallennus onnistui, muuten false
+     * @param difficulty the chosen difficulty level ("BEGINNER", "INTERMEDIATE" or
+     *                   "EXPERT")
+     * @param name       the player's name
+     * @param minutes    minutes taken to complete the game
+     * @param seconds    seconds taken to complete the game
+     * @return true if saving was successful, false otherwise
      */
     public boolean createGameResult(String difficulty, String name, int minutes, int seconds) {
         if (name == null || name.trim().isEmpty()) {

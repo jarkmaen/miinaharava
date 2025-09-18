@@ -26,7 +26,7 @@ public class GameResultTextFileDAOTest {
         gameResultsFile = temporaryFolder.newFile("game_results_test.txt");
 
         try (FileWriter file = new FileWriter(gameResultsFile.getAbsolutePath())) {
-            file.write("EASY,Test,1,1\n");
+            file.write("BEGINNER,Test,1,1\n");
         }
 
         gameResultTextFileDAO = new GameResultTextFileDAO(gameResultsFile.getAbsolutePath());
@@ -38,7 +38,7 @@ public class GameResultTextFileDAOTest {
         assertEquals(1, gameResults.size());
 
         GameResult gameResult = gameResults.get(0);
-        assertEquals("EASY", gameResult.getDifficulty());
+        assertEquals("BEGINNER", gameResult.getDifficulty());
         assertEquals("Test", gameResult.getName());
         assertEquals(1, gameResult.getMinutes());
         assertEquals(1, gameResult.getSeconds());
@@ -46,13 +46,13 @@ public class GameResultTextFileDAOTest {
 
     @Test
     public void createdGameResultIsAddedToTextFile() throws Exception {
-        gameResultTextFileDAO.create(new GameResult("MEDIUM", "Test", 2, 50));
+        gameResultTextFileDAO.create(new GameResult("INTERMEDIATE", "Test", 2, 50));
 
         List<GameResult> gameResults = gameResultTextFileDAO.getAll();
         assertEquals(2, gameResults.size());
 
         GameResult gameResult = gameResults.get(1);
-        assertEquals("MEDIUM", gameResult.getDifficulty());
+        assertEquals("INTERMEDIATE", gameResult.getDifficulty());
         assertEquals("Test", gameResult.getName());
         assertEquals(2, gameResult.getMinutes());
         assertEquals(50, gameResult.getSeconds());

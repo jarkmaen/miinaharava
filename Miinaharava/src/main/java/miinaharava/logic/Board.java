@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Random;
 
 /**
- * Pelilaudan logiikasta vastaava luokka
+ * Class responsible for the game board logic
  */
 public class Board {
 
@@ -31,7 +31,7 @@ public class Board {
     }
 
     /**
-     * Asettaa tietyn määrän miinoja satunnaisesti kentälle
+     * Randomly places a specified number of mines onto the board
      */
     private void addMinesToBoard() {
         HashSet<Integer> set = new HashSet<>();
@@ -55,8 +55,8 @@ public class Board {
     }
 
     /**
-     * Asettaa jokaiselle ruudulle numeron, mikä kertoo kuinka monta miinaa sen
-     * ympärillä on
+     * Sets a number to each tile on the board, indicating how many mines are
+     * adjacent to it
      */
     private void addNumbersToTiles() {
         for (int x = 0; x < xTiles; x++) {
@@ -103,25 +103,25 @@ public class Board {
     }
 
     /**
-     * Tarkistaa ovatko kaikki turvalliset ruudut avattu
+     * Checks if all safe tiles have been revealed
      *
-     * @return true jos on, muuten false
+     * @return true if all safe tiles are revealed, false otherwise
      */
     public boolean isGameOver() {
         return openTiles == xTiles * yTiles - mines;
     }
 
     /**
-     * Päivittää avattujen ruutujen määrän
+     * Updates the count of opened tiles
      */
     public void updateOpenTiles() {
         openTiles++;
     }
 
     /**
-     * Päivittää asetettujen lippujen määrän
-     * 
-     * @param delta lippujen määrän muutos, joka on -1 tai +1
+     * Updates the number of placed flags
+     *
+     * @param delta the change in the number of flags, either -1 or +1
      */
     public void updateFlags(int delta) {
         flags += delta;

@@ -42,7 +42,7 @@ import miinaharava.logic.GameResult;
 import miinaharava.logic.GameResultService;
 
 /**
- * Pelin käyttöliittymästä vastaava luokka
+ * Class responsible for the game's user interface.
  */
 public class MinesweeperUI extends Application {
 
@@ -57,58 +57,58 @@ public class MinesweeperUI extends Application {
     private Parent getMainMenuWindow(Stage stage) {
         VBox vBox = new VBox();
 
-        Text text = new Text("MIINAHARAVA");
+        Text text = new Text("MINESWEEPER");
         text.setFont(Font.font(44));
 
-        HBox easyHBox = new HBox();
-        Button easyButton = new Button("HELPPO --- 9x9 ALUE --- 10 MIINAA");
-        easyButton.setPrefWidth(270);
-        easyButton.setOnAction(value -> {
-            board = new Board(9, 9, "EASY", 10);
+        HBox beginnerHBox = new HBox();
+        Button beginnerButton = new Button("BEGINNER: 9x9 area / 10 mines");
+        beginnerButton.setPrefWidth(270);
+        beginnerButton.setOnAction(value -> {
+            board = new Board(9, 9, "BEGINNER", 10);
             stage.setScene(new Scene(getBoardWindow(stage)));
         });
-        ComboBox<String> easyComboBox = new ComboBox<>();
-        addPersonalBestResults(easyComboBox, "EASY");
-        easyComboBox.setPromptText("PB");
-        easyComboBox.setPrefWidth(60);
-        easyComboBox.setMaxWidth(60);
-        easyHBox.getChildren().addAll(easyButton, easyComboBox);
-        easyHBox.setAlignment(Pos.CENTER);
-        easyHBox.setSpacing(10);
+        ComboBox<String> beginnerComboBox = new ComboBox<>();
+        addPersonalBestResults(beginnerComboBox, "BEGINNER");
+        beginnerComboBox.setPromptText("PB");
+        beginnerComboBox.setPrefWidth(60);
+        beginnerComboBox.setMaxWidth(60);
+        beginnerHBox.getChildren().addAll(beginnerButton, beginnerComboBox);
+        beginnerHBox.setAlignment(Pos.CENTER);
+        beginnerHBox.setSpacing(10);
 
-        HBox mediumHBox = new HBox();
-        Button mediumButton = new Button("KOHTALAINEN --- 16x16 ALUE --- 40 MIINAA");
-        mediumButton.setPrefWidth(270);
-        mediumButton.setOnAction(value -> {
-            board = new Board(16, 16, "MEDIUM", 40);
+        HBox intermediateHBox = new HBox();
+        Button intermediateButton = new Button("INTERMEDIATE: 16x16 area / 40 mines");
+        intermediateButton.setPrefWidth(270);
+        intermediateButton.setOnAction(value -> {
+            board = new Board(16, 16, "INTERMEDIATE", 40);
             stage.setScene(new Scene(getBoardWindow(stage)));
         });
-        ComboBox<String> mediumComboBox = new ComboBox<>();
-        addPersonalBestResults(mediumComboBox, "MEDIUM");
-        mediumComboBox.setPromptText("PB");
-        mediumComboBox.setPrefWidth(60);
-        mediumComboBox.setMaxWidth(60);
-        mediumHBox.getChildren().addAll(mediumButton, mediumComboBox);
-        mediumHBox.setAlignment(Pos.CENTER);
-        mediumHBox.setSpacing(10);
+        ComboBox<String> intermediateComboBox = new ComboBox<>();
+        addPersonalBestResults(intermediateComboBox, "INTERMEDIATE");
+        intermediateComboBox.setPromptText("PB");
+        intermediateComboBox.setPrefWidth(60);
+        intermediateComboBox.setMaxWidth(60);
+        intermediateHBox.getChildren().addAll(intermediateButton, intermediateComboBox);
+        intermediateHBox.setAlignment(Pos.CENTER);
+        intermediateHBox.setSpacing(10);
 
-        HBox hardHBox = new HBox();
-        Button hardButton = new Button("VAIKEA --- 30x16 ALUE --- 99 MIINAA");
-        hardButton.setPrefWidth(270);
-        hardButton.setOnAction(value -> {
-            board = new Board(30, 16, "HARD", 99);
+        HBox expertHBox = new HBox();
+        Button expertButton = new Button("EXPERT: 30x16 area / 99 mines");
+        expertButton.setPrefWidth(270);
+        expertButton.setOnAction(value -> {
+            board = new Board(30, 16, "EXPERT", 99);
             stage.setScene(new Scene(getBoardWindow(stage)));
         });
-        ComboBox<String> hardComboBox = new ComboBox<>();
-        addPersonalBestResults(hardComboBox, "HARD");
-        hardComboBox.setPromptText("PB");
-        hardComboBox.setPrefWidth(60);
-        hardComboBox.setMaxWidth(60);
-        hardHBox.getChildren().addAll(hardButton, hardComboBox);
-        hardHBox.setAlignment(Pos.CENTER);
-        hardHBox.setSpacing(10);
+        ComboBox<String> expertComboBox = new ComboBox<>();
+        addPersonalBestResults(expertComboBox, "EXPERT");
+        expertComboBox.setPromptText("PB");
+        expertComboBox.setPrefWidth(60);
+        expertComboBox.setMaxWidth(60);
+        expertHBox.getChildren().addAll(expertButton, expertComboBox);
+        expertHBox.setAlignment(Pos.CENTER);
+        expertHBox.setSpacing(10);
 
-        vBox.getChildren().addAll(text, easyHBox, mediumHBox, hardHBox);
+        vBox.getChildren().addAll(text, beginnerHBox, intermediateHBox, expertHBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setPrefSize(600, 400);
         vBox.setSpacing(10);
@@ -118,7 +118,7 @@ public class MinesweeperUI extends Application {
 
     private Parent getBoardWindow(Stage stage) {
         BorderPane headerPane = new BorderPane();
-        Button button = new Button("Päävalikkoon");
+        Button button = new Button("Main menu");
         button.setOnAction(value -> {
             stage.setScene(new Scene(getMainMenuWindow(stage)));
         });
@@ -218,10 +218,10 @@ public class MinesweeperUI extends Application {
         VBox vBox = new VBox();
 
         Text text = new Text();
-        text.setText("HÄVISIT PELIN");
+        text.setText("GAME OVER");
         text.setFont(Font.font(22));
 
-        Button button = new Button("PALAA PÄÄVALIKKOON");
+        Button button = new Button("Return to main menu");
         button.setOnAction(value -> {
             stage.setScene(new Scene(getMainMenuWindow(stage)));
         });
@@ -238,17 +238,17 @@ public class MinesweeperUI extends Application {
         VBox vBox = new VBox();
 
         Text youWon = new Text();
-        youWon.setText("VOITIT PELIN");
+        youWon.setText("YOU WON");
         youWon.setFont(Font.font(22));
 
         Text time = new Text();
-        time.setText("AIKA: " + minutes + ":" + seconds);
+        time.setText("TIME: " + minutes + ":" + seconds);
         time.setFont(Font.font(16));
 
         HBox hBox = new HBox();
         TextField textField = new TextField();
-        textField.setPromptText("SYÖTÄ NIMESI");
-        Button saveButton = new Button("TALLENNA JA PALAA PÄÄVALIKKOON");
+        textField.setPromptText("Enter your name");
+        Button saveButton = new Button("Save and return to main menu");
         saveButton.setOnAction(value -> {
             if (!textField.getText().isEmpty()) {
                 gameResultService.createGameResult(board.getDifficulty(), textField.getText(), minutes, seconds);
@@ -259,7 +259,7 @@ public class MinesweeperUI extends Application {
         hBox.setAlignment(Pos.CENTER);
         hBox.setSpacing(10);
 
-        Button button = new Button("PALAA PÄÄVALIKKOON");
+        Button button = new Button("Return to main menu");
         button.setOnAction(value -> {
             stage.setScene(new Scene(getMainMenuWindow(stage)));
         });
@@ -330,7 +330,7 @@ public class MinesweeperUI extends Application {
     public void start(Stage stage) {
         gameOverScene = new Scene(getGameOverWindow(stage));
         stage.setScene(new Scene(getMainMenuWindow(stage)));
-        stage.setTitle("Miinaharava");
+        stage.setTitle("Minesweeper");
         stage.show();
         stopwatch();
     }
