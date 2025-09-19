@@ -25,7 +25,7 @@ To run the commands below, you'll need to have both [Java Development Kit (JDK)]
 To run the application, use the command:
 
 ```
-mvn compile exec:java -Dexec.mainClass=minesweeper.Main
+mvn compile exec:java
 ```
 
 ### Building the .jar file
@@ -62,7 +62,7 @@ To generate the JavaDoc documentation, use the command:
 mvn javadoc:javadoc
 ```
 
-The report's output can be found in the target/site/apidocs/ directory under the name index.html.
+The report's output can be found in the target/reports/apidocs/ directory under the name index.html.
 
 ### Checkstyle
 
