@@ -47,8 +47,8 @@ public class Board {
 
         for (int x = 0; x < xTiles; x++) {
             for (int y = 0; y < yTiles; y++) {
-                boolean hasMine = set.contains(counter);
-                board[x][y] = new Tile(x, y, hasMine);
+                boolean mine = set.contains(counter);
+                board[x][y] = new Tile(x, y, mine);
                 counter++;
             }
         }
@@ -109,6 +109,39 @@ public class Board {
      */
     public boolean isGameOver() {
         return openTiles == xTiles * yTiles - mines;
+    }
+
+    /**
+     * Opens the tile at the given coordinates. If the tile has zero adjacent mines,
+     * recursively opens all adjacent tiles that are not mines and have not been
+     * opened yet
+     *
+     * @param x the x coordinate of the tile to open
+     * @param y the y coordinate of the tile to open
+     */
+    public void openTile(int x, int y) {
+        if (x < 0 || y < 0 || x >= xTiles || y >= yTiles) {
+            return;
+        }
+
+        Tile tile = board[x][y];
+
+        if (tile.isOpen() || tile.hasMine()) {
+            return;
+        }
+
+        tile.setOpen();
+        updateOpenTiles();
+
+        if (tile.getAdjacentMinesCount() == 0) {
+            for (int offsetX = -1; offsetX <= 1; offsetX++) {
+                for (int offsetY = -1; offsetY <= 1; offsetY++) {
+                    if (offsetX != 0 || offsetY != 0) {
+                        openTile(x + offsetX, y + offsetY);
+                    }
+                }
+            }
+        }
     }
 
     /**

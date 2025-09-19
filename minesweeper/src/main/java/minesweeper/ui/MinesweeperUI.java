@@ -136,6 +136,9 @@ public class MinesweeperUI extends Application {
 
         for (int y = 0; y < board.getBoardHeight(); y++) {
             for (int x = 0; x < board.getBoardWidth(); x++) {
+                final int tileX = x;
+                final int tileY = y;
+
                 StackPane tile = new StackPane();
 
                 Rectangle rectangle = new Rectangle(30, 30);
@@ -148,17 +151,17 @@ public class MinesweeperUI extends Application {
                 flag.setText("P");
 
                 Text tileContent = new Text();
+                int adjacentMines = board.getBoard()[x][y].getAdjacentMinesCount();
                 tileContent.setText(
                         board.getBoard()[x][y].hasMine() ? "X"
-                                : String.valueOf(board.getBoard()[x][y].getAdjacentMinesCount()));
+                                : (adjacentMines == 0 ? "" : String.valueOf(adjacentMines)));
                 tileContent.setFont(Font.font(16));
                 tileContent.setVisible(false);
 
                 EventHandler<MouseEvent> eventHandler = (MouseEvent e) -> {
                     if (e.getButton() == MouseButton.PRIMARY && !flag.isVisible() && !tileContent.isVisible()) {
-                        rectangle.setFill(Color.WHITE);
-                        tileContent.setVisible(true);
-                        board.updateOpenTiles();
+                        board.openTile(tileX, tileY);
+                        updateBoardUI(gridPane);
 
                         if (board.isGameOver()) {
                             timeline.stop();
@@ -300,6 +303,22 @@ public class MinesweeperUI extends Application {
 
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(false);
+    }
+
+    private void updateBoardUI(GridPane gridPane) {
+        for (int y = 0; y < board.getBoardHeight(); y++) {
+            for (int x = 0; x < board.getBoardWidth(); x++) {
+                Tile tile = board.getBoard()[x][y];
+                StackPane tilePane = (StackPane) gridPane.getChildren().get(y * board.getBoardWidth() + x);
+                Rectangle rectangle = (Rectangle) tilePane.getChildren().get(0);
+                Text tileContent = (Text) tilePane.getChildren().get(1);
+
+                if (tile.isOpen()) {
+                    rectangle.setFill(Color.WHITE);
+                    tileContent.setVisible(true);
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {

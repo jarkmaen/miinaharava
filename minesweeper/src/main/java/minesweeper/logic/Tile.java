@@ -5,15 +5,18 @@ package minesweeper.logic;
  */
 public class Tile {
 
-    private boolean hasMine;
+    private boolean mine;
+    private boolean open;
     private int adjacentMinesCount;
     private int x;
     private int y;
 
-    public Tile(int x, int y, boolean hasMine) {
+    public Tile(int x, int y, boolean mine) {
         this.x = x;
         this.y = y;
-        this.hasMine = hasMine;
+        this.mine = mine;
+
+        open = false;
     }
 
     public int getAdjacentMinesCount() {
@@ -28,11 +31,19 @@ public class Tile {
         return y;
     }
 
+    public boolean isOpen() {
+        return open;
+    }
+
     public boolean hasMine() {
-        return hasMine;
+        return mine;
     }
 
     public void setAdjacentMinesCount(int adjacentMinesCount) {
         this.adjacentMinesCount = adjacentMinesCount;
+    }
+
+    public void setOpen() {
+        open = true;
     }
 }
