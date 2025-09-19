@@ -19,7 +19,7 @@ public class GameResultTextFileDAOTest {
     private File gameResultsFile;
 
     @Rule
-    private TemporaryFolder temporaryFolder = new TemporaryFolder();
+    public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
     @Before
     public void setUp() throws Exception {
