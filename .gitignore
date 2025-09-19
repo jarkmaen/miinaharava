@@ -1,4 +1,5 @@
 .vscode/
+/minesweeper/dependency-reduced-pom.xml
 /minesweeper/target/
 config.properties
 game_results.txt
