@@ -14,6 +14,6 @@ The DAO classes are tested using JUnit. The TemporaryFolder rule is used to make
 
 ### Test coverage
 
-The test coverage was measured using JaCoCo. The coverage for the application is 88% for lines and 92% for branches.
+The test coverage was measured using JaCoCo. The coverage for the application is 90% for lines and 92% for branches.
 
 <img src="images/test_coverage.png">
