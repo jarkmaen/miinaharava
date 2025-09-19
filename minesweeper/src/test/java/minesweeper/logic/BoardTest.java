@@ -75,4 +75,17 @@ public class BoardTest {
 
         assertTrue(board.isGameOver() == true);
     }
+
+    @Test
+    public void openingTileWithNoAdjacentMinesOpensAllConnectedSafeTiles() {
+        board = new Board(3, 3, "CUSTOM", 0);
+
+        board.openTile(1, 1);
+
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                assertTrue(board.getBoard()[x][y].isOpen());
+            }
+        }
+    }
 }
