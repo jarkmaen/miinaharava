@@ -22,7 +22,7 @@ This application is a classic Minesweeper game. The goal of the game is to revea
     - A timer that displays the elapsed time since the game started.
     - The board itself, where the game is played.
 - The user can interact with the board as follows:
-    - Left clicking a tile reveals its content (either a mine or a number).
+    - Left clicking a tile reveals its content (either a mine, a number or a blank).
         - If the revealed tile has zero adjacent mines, all adjacent tiles are automatically revealed recursively.
     - Right clicking a tile places a flag to mark it as a suspected mine location. Flags help the user keep track of where they believe mines are located.
     - If a tile contains a number, it indicates how many mines are adjacent to that tile.
