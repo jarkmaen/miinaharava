@@ -2,7 +2,7 @@
 
 ## Getting started
 
-To run the application, you'll need to have [Java](https://www.java.com/) installed on your computer. You can then download the latest .jar file from the [releases](https://github.com/jarkmaen/minesweeper/releases/tag/viikko7) page and run it directly.
+To run the application, you'll need to have [Java](https://www.java.com/) installed on your computer. You can then download the latest .jar file from the [releases](https://github.com/jarkmaen/minesweeper/releases/tag/v1.0.0) page and run it directly.
 
 Alternatively, if you want to run the application from the source code, refer to the [Command line operations](../README.md#command-line-operations) section of the main README.
 

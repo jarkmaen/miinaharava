@@ -4,7 +4,7 @@
 
 A classic Minesweeper game implemented in Java. Developed as part of the University of Helsinki software engineering project course.
 
-A runnable .jar file can be downloaded from the [releases](https://github.com/jarkmaen/minesweeper/releases) page.
+A runnable .jar file can be downloaded from the [releases](https://github.com/jarkmaen/minesweeper/releases/tag/v1.0.0) page.
 
 ## Documentation
 
