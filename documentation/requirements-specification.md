@@ -23,6 +23,7 @@ This application is a classic Minesweeper game. The goal of the game is to revea
     - The board itself, where the game is played.
 - The user can interact with the board as follows:
     - Left clicking a tile reveals its content (either a mine or a number).
+        - If the revealed tile has zero adjacent mines, all adjacent tiles are automatically revealed recursively.
     - Right clicking a tile places a flag to mark it as a suspected mine location. Flags help the user keep track of where they believe mines are located.
     - If a tile contains a number, it indicates how many mines are adjacent to that tile.
     - If the user clicks a tile containing a mine, the game ends immediately.
@@ -31,5 +32,4 @@ This application is a classic Minesweeper game. The goal of the game is to revea
 ## Future development ideas
 
 - Add the ability to set a custom board size and number of mines.
-- Implement automatic revealing of all adjacent zero tiles when clicking a tile with zero adjacent mines.
 - Enable saving personal bests to a web page with a high score table.
