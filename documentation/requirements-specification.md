@@ -2,7 +2,7 @@
 
 This application is a classic Minesweeper game. The goal of the game is to reveal all safe tiles on the board without triggering any mines. If a mine is revealed, the game ends in a loss. The game features three difficulties and tracks the user's personal best times for each of them.
 
-## Basic version functionalities
+## Basic functionality
 
 ### Main menu
 
